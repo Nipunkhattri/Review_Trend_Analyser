@@ -56,7 +56,7 @@ def save_trend_data_to_csv(analysis_id: str, trend_data: dict) -> str:
     Save trend data to CSV file with topics as columns and dates as rows
     """
     try:
-        data_dir = "data"
+        data_dir = "output"
         if not os.path.exists(data_dir):
             os.makedirs(data_dir)
         
