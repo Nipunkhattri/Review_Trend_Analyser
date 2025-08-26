@@ -12,7 +12,7 @@ def create_review_analysis_workflow():
     Each step feeds into the next step linearly
     """
     workflow = StateGraph(ReviewAnalysisState)
-    
+        
     workflow.add_node("ingest_data", data_ingestion_node)           
     workflow.add_node("extract_topics", topic_extraction_node)    
     workflow.add_node("consolidate_topics", topic_consolidation_node)  

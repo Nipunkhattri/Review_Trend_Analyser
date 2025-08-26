@@ -9,8 +9,7 @@ from config import azure_config
 
 async def topic_consolidation_node(state: ReviewAnalysisState) -> ReviewAnalysisState:
     """
-    AGENT NODE - Complex reasoning needed for topic consolidation
-    This is where we need intelligent decision making!
+    Consolidating the topics from the extracted topics
     """
     print(f"Starting topic consolidation for analysis {state['analysis_id']}")
 

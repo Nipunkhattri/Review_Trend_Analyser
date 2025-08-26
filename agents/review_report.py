@@ -5,8 +5,7 @@ from datetime import datetime
 
 async def review_report_node(state: ReviewAnalysisState) -> ReviewAnalysisState:
     """
-    FUNCTION NODE - Generate review report and save to database
-    Straightforward calculation and storage
+    Generate review report and save to database
     """
     print(f"Starting review report generation for analysis {state['analysis_id']}")
     
@@ -86,7 +85,7 @@ def save_trend_data_to_csv(analysis_id: str, trend_data: dict) -> str:
         df = pd.DataFrame(csv_data)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filename = f"data/trend_analysis_{analysis_id}_{timestamp}.csv"
+        filename = f"output/trend_analysis_{analysis_id}_{timestamp}.csv"
         
         df.to_csv(filename, index=False)
         

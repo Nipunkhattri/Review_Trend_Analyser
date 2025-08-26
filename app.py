@@ -5,6 +5,8 @@ from workflow import create_review_analysis_workflow
 from agents.state_types import ReviewAnalysisState
 from config import azure_config
 import os
+import pandas as pd
+import io
 
 workflow = create_review_analysis_workflow()
 
@@ -97,4 +99,22 @@ if submitted:
             st.error(result["errors"])
 
         st.subheader("Trend Analysis")
-        st.json(result.get("trend_analysis", {}))
+        trend_data = result.get("trend_analysis", {})
+        if trend_data:
+            dates = [entry['date'] for entry in next(iter(trend_data.values()))['daily_data']]
+            topics = list(trend_data.keys())
+            table = {'date': dates}
+            for topic in topics:
+                table[topic] = [entry['frequency'] for entry in trend_data[topic]['daily_data']]
+            df = pd.DataFrame(table)
+            st.subheader("Trend Analysis CSV")
+            st.dataframe(df)
+
+            csv_buffer = io.StringIO()
+            df.to_csv(csv_buffer, index=False)
+            st.download_button(
+                label="Download Trend Analysis CSV",
+                data=csv_buffer.getvalue(),
+                file_name=f"trend_analysis_{analysis_id}_{datetime.today().strftime('%Y%m%d')}.csv",
+                mime="text/csv"
+            )
