@@ -1,0 +1,16 @@
+asyncio
+datetime
+
+google-play-scraper
+
+langchain
+langchain-openai
+langchain-core
+
+openai
+langgraph
+jsonschema
+typing-extensions
+pandas
+
+streamlit
